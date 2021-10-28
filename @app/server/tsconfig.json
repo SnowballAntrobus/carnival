@@ -8,7 +8,8 @@
     "declarationDir": "dist",
     "lib": ["es2018", "esnext.asynciterable", "DOM"],
     "target": "es2018",
-    "module": "commonjs"
+    "module": "commonjs",
+    "baseUrl": "."
   },
   "include": ["src"],
   "references": [{ "path": "../config" }]
