@@ -11,10 +11,5 @@
     "module": "commonjs"
   },
   "include": ["src"],
-  "references": [{ "path": "../config" }],
-  "ts-node": {
-    "compilerOptions": {
-      "rootDir": null
-    }
-  }
+  "references": [{ "path": "../config" }]
 }

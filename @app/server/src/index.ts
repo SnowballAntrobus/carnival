@@ -1,20 +1,21 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
+import chalk from "chalk";
 import { createServer } from "http";
 
-import { makeApp } from "./app";
+import { getShutdownActions, makeApp } from "./app";
 
 // @ts-ignore
 const packageJson = require("../../../package.json");
 
 async function main() {
-  // Create HTTP server
+  // Create our HTTP server
   const httpServer = createServer();
 
-  // Make application
+  // Make our application (loading all the middleware, etc)
   const app = await makeApp({ httpServer });
 
-  // Add application to HTTP server
+  // Add our application to our HTTP server
   httpServer.addListener("request", app);
 
   // And finally, we open the listen port
@@ -27,9 +28,30 @@ async function main() {
         : address && address.port
         ? String(address.port)
         : String(PORT);
-    console.log(`${packageJson.name} listening on port ${actualPort}`);
-    console.log(`Site: ${`http://localhost:${actualPort}`}`);
-    console.log(`GraphiQL: ${`http://localhost:${actualPort}/graphiql`}`);
+    console.log();
+    console.log(
+      chalk.green(
+        `${chalk.bold(packageJson.name)} listening on port ${chalk.bold(
+          actualPort
+        )}`
+      )
+    );
+    console.log();
+    console.log(
+      `  Site:     ${chalk.bold.underline(`http://localhost:${actualPort}`)}`
+    );
+    console.log(
+      `  GraphiQL: ${chalk.bold.underline(
+        `http://localhost:${actualPort}/graphiql`
+      )}`
+    );
+    console.log();
+  });
+
+  // Nodemon SIGUSR2 handling
+  const shutdownActions = getShutdownActions(app);
+  shutdownActions.push(() => {
+    httpServer.close();
   });
 }
 
