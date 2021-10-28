@@ -2,7 +2,15 @@
   "name": "@app/config",
   "private": true,
   "version": "0.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
