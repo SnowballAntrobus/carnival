@@ -5,6 +5,11 @@
   "repository": "https://github.com/SnowballAntrobus/carnival.git",
   "author": "Dante Ramón Gil-Marín <drgilmarin@uchicago.edu>",
   "license": "MIT",
+  "workspaces": {
+    "packages": [
+      "@app/*"
+    ]
+  },
   "prettier": {
     "trailingComma": "es5",
     "proseWrap": "always",
