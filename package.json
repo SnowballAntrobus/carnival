@@ -1,0 +1,23 @@
+{
+  "name": "carnival",
+  "version": "0.0.1",
+  "private": true,
+  "repository": "https://github.com/SnowballAntrobus/carnival.git",
+  "author": "Dante Ramón Gil-Marín <drgilmarin@uchicago.edu>",
+  "license": "MIT",
+  "prettier": {
+    "trailingComma": "es5",
+    "proseWrap": "always",
+    "overrides": [
+      {
+        "files": [
+          "*.yml",
+          "*.yaml"
+        ],
+        "options": {
+          "printWidth": 120
+        }
+      }
+    ]
+  }
+}
