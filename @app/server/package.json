@@ -47,7 +47,8 @@
     "@types/passport": "^1.0.6",
     "@types/pg": "^8.6.0",
     "@types/redis": "^2.8.27",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "source-map-support": "^0.5.13"
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.1",
