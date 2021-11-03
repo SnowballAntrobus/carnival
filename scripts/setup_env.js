@@ -3,7 +3,6 @@ const {
   yarnCmd,
   runMain,
   checkGit,
-  outro,
   withDotenvUpdater,
   updateDotenv,
   readDotenv,

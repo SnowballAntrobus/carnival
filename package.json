@@ -7,10 +7,12 @@
   "license": "MIT",
   "scripts": {
     "setup:env": "node ./scripts/setup_env.js",
+    "setup:db": "node ./scripts/setup_db.js",
     "clean": "node ./scripts/clean.js",
     "reset": "yarn clean && node ./scripts/delete-env-file.js",
     "--shortcuts to run commands in workspaces--": "",
-    "server": "yarn workspace @app/server"
+    "server": "yarn workspace @app/server",
+    "db": "yarn workspace @app/db"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",

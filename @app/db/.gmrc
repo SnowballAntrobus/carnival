@@ -1,38 +1,18 @@
 /*
  * Graphile Migrate configuration.
  *
- * If you decide to commit this file (recommended) please ensure that it does
- * not contain any secrets (passwords, etc) - we recommend you manage these
- * with environmental variables instead.
+ * This file is version tracked, do not add any secrets (passwords, etc) to it
+ * - manage these with environmental variables instead.
  *
  * This file is in JSON5 format, in VSCode you can use "JSON with comments" as
  * the file format.
  */
+
 {
   /*
-   * connectionString: this tells Graphile Migrate where to find the database
-   * to run the migrations against.
-   *
-   * RECOMMENDATION: use `DATABASE_URL` envvar instead.
+   * Database connections strings are sourced from the DATABASE_URL,
+   * SHADOW_DATABASE_URL and ROOT_DATABASE_URL environmental variables.
    */
-  // "connectionString": "postgres://appuser:apppassword@host:5432/appdb",
-
-  /*
-   * shadowConnectionString: like connectionString, but this is used for the
-   * shadow database (which will be reset frequently).
-   *
-   * RECOMMENDATION: use `SHADOW_DATABASE_URL` envvar instead.
-   */
-  // "shadowConnectionString": "postgres://appuser:apppassword@host:5432/appdb_shadow",
-
-  /*
-   * rootConnectionString: like connectionString, but this is used for
-   * dropping/creating the database in `graphile-migrate reset`. This isn't
-   * necessary, shouldn't be used in production, but helps during development.
-   *
-   * RECOMMENDATION: use `ROOT_DATABASE_URL` envvar instead.
-   */
-  // "rootConnectionString": "postgres://adminuser:adminpassword@host:5432/postgres",
 
   /*
    * pgSettings: key-value settings to be automatically loaded into PostgreSQL
@@ -40,7 +20,7 @@
    * <value>`
    */
   "pgSettings": {
-    // "search_path": "app_public,app_private,app_hidden,public",
+    "search_path": "app_public,app_private,app_hidden,public"
   },
 
   /*
@@ -61,7 +41,8 @@
    * these.
    */
   "placeholders": {
-    // ":DATABASE_VISITOR": "!ENV", // Uses process.env.DATABASE_VISITOR
+    ":DATABASE_AUTHENTICATOR": "!ENV",
+    ":DATABASE_VISITOR": "!ENV"
   },
 
   /*
@@ -84,19 +65,23 @@
    * afterReset: actions executed after a `graphile-migrate reset` command.
    */
   "afterReset": [
-    // "afterReset.sql",
-    // { "_": "command", "command": "graphile-worker --schema-only" },
+    "!afterReset.sql"
+    // {
+    //   "_": "command",
+    //   "command": "cross-env DATABASE_URL=\"$GM_DBURL\" yarn workspace @app/worker install-db-schema"
+    // }
   ],
- 
+
   /*
    * afterAllMigrations: actions executed once all migrations are complete.
    */
   "afterAllMigrations": [
     // {
-    //   "_": "command",
-    //   "shadow": true,
-    //   "command": "if [ \"$IN_TESTS\" != \"1\" ]; then ./scripts/dump-db; fi",
-    // },
+    //   // "_": "command",
+    //   // "shadow": true,
+    //   // // NOTE: this script does nothing when envvar `IN_TESTS` is `1`
+    //   // "command": "node scripts/dump-db.js"
+    // }
   ],
 
   /*
@@ -105,17 +90,18 @@
    */
   "afterCurrent": [
     // {
-    //   "_": "command",
-    //   "shadow": true,
-    //   "command": "if [ \"$IN_TESTS\" = \"1\" ]; then ./scripts/test-seed; fi",
-    // },
+    //   // "_": "command",
+    //   // "shadow": true,
+    //   // // NOTE: this script does nothing unless envvar `IN_TESTS` is `1`
+    //   // "command": "node scripts/test-seed.js"
+    // }
   ],
 
   /*
    * blankMigrationContent: content to be written to the current migration
    * after commit. NOTE: this should only contain comments.
    */
-  // "blankMigrationContent": "-- Write your migration here\n",
+  // "blankMigrationContent": "",
 
   /****************************************************************************\
   ***                                                                        ***
