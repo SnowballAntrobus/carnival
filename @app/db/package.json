@@ -1,0 +1,15 @@
+{
+  "name": "@app/db",
+  "private": true,
+  "version": "0.0.0",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "graphile-migrate": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.6.0",
+    "graphile-worker": "^0.11.0",
+    "lodash": "^4.17.15",
+    "pg": "^8.0.3"
+  }
+}
