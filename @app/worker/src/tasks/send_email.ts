@@ -2,11 +2,7 @@ import { Task } from "graphile-worker";
 import { template as lodashTemplate } from "lodash";
 // @ts-ignore
 import mjml2html = require("mjml");
-import {
-  emailLegalText as legalText,
-  fromEmail,
-  projectName,
-} from "@app/config";
+import { fromEmail, projectName } from "@app/config";
 import chalk from "chalk";
 import { promises as fsp } from "fs";
 import { htmlToText } from "html-to-text";
@@ -84,7 +80,6 @@ function loadTemplate(template: string) {
       return (variables: { [varName: string]: any }) => {
         const mjml = templateFn({
           projectName,
-          legalText,
           ...variables,
         });
         const { html, errors } = mjml2html(mjml);

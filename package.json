@@ -6,13 +6,23 @@
   "author": "Dante Ramón Gil-Marín <drgilmarin@uchicago.edu>",
   "license": "MIT",
   "scripts": {
+    "setup": "yarn && yarn setup:env auto && yarn setup:db",
     "setup:env": "node ./scripts/setup_env.js",
     "setup:db": "node ./scripts/setup_db.js",
+    "start": "node ./scripts/start.js",
+    "dev": "yarn && tsc -b && concurrently --kill-others --names \"TSC,WATCH,RUN\" --prefix \"({name})\" --prefix-colors \"yellow.bold,yellow.bold,cyan.bold,greenBright.bold\" \"tsc -b --watch --preserveWatchOutput\" \"lerna run --parallel watch\" \"lerna run --parallel dev\"",
     "clean": "node ./scripts/clean.js",
     "reset": "yarn clean && node ./scripts/delete-env-file.js",
     "--shortcuts to run commands in workspaces--": "",
     "server": "yarn workspace @app/server",
-    "db": "yarn workspace @app/db"
+    "db": "yarn workspace @app/db",
+    "worker": "yarn workspace @app/worker"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "graphql": "^15.4.0",
+    "lerna": "^4.0.0",
+    "string-width": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -20,11 +30,13 @@
     "@babel/preset-typescript": "^7.13.0",
     "typescript": "^4.4.4",
     "dotenv": "^10.0.0",
+    "concurrently": "^6.2.0",
     "inquirer": "^8.1.0",
     "nodemon": "^2.0.7",
     "prettier": "^2.3.0",
     "@types/node": "^15.6.1",
     "ts-node": "^10.0.0",
+    "ts-loader": "^8.0.11",
     "rimraf": "^3.0.2",
     "update-dotenv": "^1.1.1"
   },

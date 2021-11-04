@@ -38,5 +38,9 @@
     }
   },
   "include": [],
-  "references": [{ "path": "@app/config" }, { "path": "@app/server" }]
+  "references": [
+    { "path": "@app/config" },
+    { "path": "@app/server" },
+    { "path": "@app/worker" }
+  ]
 }
