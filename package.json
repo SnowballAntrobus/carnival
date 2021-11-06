@@ -11,9 +11,11 @@
     "setup:db": "node ./scripts/setup_db.js",
     "start": "node ./scripts/start.js",
     "dev": "yarn && tsc -b && concurrently --kill-others --names \"TSC,WATCH,RUN\" --prefix \"({name})\" --prefix-colors \"yellow.bold,yellow.bold,cyan.bold,greenBright.bold\" \"tsc -b --watch --preserveWatchOutput\" \"lerna run --parallel watch\" \"lerna run --parallel dev\"",
+    "build": "lerna run build",
     "clean": "node ./scripts/clean.js",
     "reset": "yarn clean && node ./scripts/delete-env-file.js",
     "--shortcuts to run commands in workspaces--": "",
+    "client": "yarn workspace @app/client",
     "server": "yarn workspace @app/server",
     "db": "yarn workspace @app/db",
     "worker": "yarn workspace @app/worker"

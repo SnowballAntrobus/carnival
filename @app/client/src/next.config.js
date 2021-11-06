@@ -1,7 +1,11 @@
 require("@app/config");
 
 if (!process.env.ROOT_URL) {
-  throw new Error("ROOT_URL is a required envvar");
+  if (process.argv[1].endsWith("/depcheck")) {
+    /* NOOP */
+  } else {
+    throw new Error("ROOT_URL is a required envvar");
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
